@@ -1,0 +1,4 @@
+Compile: gcc -Wall ../lib/*.c main.c -oadctest -DDEBUG_MESSAGES
+Run: ./adctest 16 115200
+16 - /dev/ttyUSB0
+17 - /dev/ttyUSB1
