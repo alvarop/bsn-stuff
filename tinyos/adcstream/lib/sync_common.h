@@ -1,0 +1,14 @@
+#ifndef SYNC_COMMON_H
+#define SYNC_COMMON_H
+
+#define MINORCT 109U
+#define MCT_TICKS 495U
+#define POLLING_PERIOD 5450U
+#define MAJORCT 65400U
+#define REST_TIME 500U
+#define MAX_DEVICES 5U 
+
+
+#define SYNC_ROUNDS 2
+
+#endif
