@@ -77,6 +77,7 @@ void process_sensor_data( uint8_t device_id, uint8_t* buffer )
 {
     uint8_t sample_counter;
     uint8_t device;
+    static uint8_t lowest_device= 0xff;
     
     // Make sure device is allocated
     if ( device_id > MAX_DEVICES )
@@ -89,9 +90,21 @@ void process_sensor_data( uint8_t device_id, uint8_t* buffer )
     // Since the access point has id 0, decrease by 1 to occupy all locations in array
     device_id--;
     
-    // Check if this packet is from new minor cycle
-    if ( sensors[device_id].flags & MESSAGE_RECEIVED )
+    if( device_id < lowest_device )
     {
+        lowest_device = device_id;
+    }
+    
+    // Check if this packet is from new minor cycle
+    if ( (device_id == lowest_device) || ( sensors[device_id].flags & MESSAGE_RECEIVED ) )
+    {
+        // Lowest device missed a packet, maybe disconnected, change to one higher
+        if ( device_id != lowest_device )
+        {
+            printf("Missed packet from device #%d, updating cycle.\n", lowest_device );
+            lowest_device++;
+        }
+        
         // Clear other device flags
         for ( device = 0; device < MAX_DEVICES; device++ )
         {

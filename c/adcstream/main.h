@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <signal.h>
-#include <unistd.h>
+//#include <unistd.h>
 
 #include "../lib/rs232.h"
 #include "../lib/tos_packet.h"
