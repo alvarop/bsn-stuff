@@ -35,16 +35,16 @@
 #define FILE_PATH "./"
 
 // flag definitions
-#define SYNCHRONIZED        (1 << 0) /* 0x01 */
-#define MESSAGE_RECEIVED    (1 << 1) /* 0x02 */
+#define SYNCHRONIZED    (1 << 0) /* 0x01 */
+#define MESSAGE_RECEIVED  (1 << 1) /* 0x02 */
 
 typedef struct
 {
-    FILE*       fp;
-    uint16_t    total_packets;
-    uint16_t    last_packet;
-    uint8_t     id;
-    uint8_t     flags;
+  FILE*     fp;
+  uint16_t  total_packets;
+  uint16_t  last_packet;
+  uint8_t   id;
+  uint8_t   flags;
 
 } bsn_sensor_t;
 
