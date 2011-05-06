@@ -64,6 +64,35 @@ uint8_t check_crc( uint8_t* packet, uint8_t count )
 /*!
   @brief Find a packet in the buffer
 */
+uint8_t packet_in_buffer( uint8_t* old_buffer )
+{
+  // replace escaped characters
+  uint16_t buffer_index = 0;
+  uint8_t sync_bytes=0;
+
+  // find first SYNC_BYTE
+  while( (sync_bytes < 2) & (buffer_index < BUFFER_SIZE) )
+  {
+    if( old_buffer[buffer_index] == SYNC_BYTE )
+    {
+      sync_bytes++;      
+    }
+    buffer_index++;
+  }
+  
+  // No packet found
+  if ( sync_bytes < 2 )
+  {
+    return 0;
+  }  
+  
+  return 1;  
+}
+
+
+/*!
+  @brief Find a packet in the buffer, remove escape characters, and return size
+*/
 uint16_t find_and_escape_packet( uint8_t* old_buffer, uint8_t* new_buffer )
 {
   // replace escaped characters
@@ -77,7 +106,8 @@ uint16_t find_and_escape_packet( uint8_t* old_buffer, uint8_t* new_buffer )
     if( old_buffer[buffer_index] == SYNC_BYTE )
     {
       start = 1;
-      new_buffer[packet_size++] = old_buffer[buffer_index];
+      // Don't include first sync byte for alignment issues
+      //new_buffer[packet_size++] = old_buffer[buffer_index];
     }
     buffer_index++;
   }
@@ -100,7 +130,10 @@ uint16_t find_and_escape_packet( uint8_t* old_buffer, uint8_t* new_buffer )
     new_buffer[packet_size++] = old_buffer[buffer_index];
     buffer_index++;
   }
-
+  if( start == 1 )
+  {
+    return 0;
+  }
   return packet_size;  
 }
 

@@ -30,6 +30,7 @@ typedef struct {
 
 uint16_t compute_crc( uint8_t*, uint8_t );
 uint8_t check_crc( uint8_t*, uint8_t );
+uint8_t packet_in_buffer( uint8_t* );
 uint16_t find_and_escape_packet( uint8_t*, uint8_t* );
 
 inline uint16_t endian_swap16(uint16_t );

@@ -1,4 +1,5 @@
 COMPONENT=RadioRemoteAppC
+CC2420_CHANNEL=26
 PFLAGS += -I../lib
 include $(MAKERULES)
 

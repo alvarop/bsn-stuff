@@ -151,7 +151,6 @@ implementation {
         }
     }
     
-    //TODO
     event message_t* RadioReceive.receive(message_t* msg, void* payload, uint8_t len) 
     {
         // Reset timer
@@ -163,10 +162,7 @@ implementation {
         atomic call Compare32.setEvent(current_event);
         call Control32.enableEvents();
         
-        // Initiate measurement
-        
-        
-        
+        // Initiate measurement                       
         atomic current_event = MINORCT;
         atomic next_message = ( (REST_TIME/2) + ( 2 * MCT_TICKS ) * NODE_ADDRESS );
         
