@@ -1,0 +1,4 @@
+Compile: gcc -Wall -I../lib/ ../lib/*.c main.c -occ2500sniff -DDEBUG_MESSAGES
+Run: ./cc2500sniff 16 115200
+16 - /dev/ttyUSB0
+17 - /dev/ttyUSB1
